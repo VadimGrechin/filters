@@ -1,6 +1,6 @@
 <template>
-  <v-container>
-    <v-layout
+  <v-container pa-0>
+    <!-- <v-layout
       text-xs-center
       wrap
     >
@@ -80,11 +80,13 @@
           </a>
         </v-layout>
       </v-flex>
-    </v-layout>
+    </v-layout> -->
+    <Filters/>
   </v-container>
 </template>
 
 <script>
+import Filters from "./Filters.vue"
   export default {
     data: () => ({
       ecosystem: [
@@ -138,7 +140,10 @@
         }
 
       ]
-    })
+    }),
+    components: {
+        Filters
+      }
   }
 </script>
 
