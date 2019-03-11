@@ -1,4 +1,7 @@
 # filter
+```
+компонент filter
+```
 
 ## Project setup
 ```

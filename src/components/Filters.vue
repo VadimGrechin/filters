@@ -31,54 +31,50 @@
         </v-divider>
   
           <!-- скрыть кнопку пока не нажата одна из кнопок фильтров -->
-        <div v-if="currentFilter !== 0">
+        <div v-if="filterButtonPressed">
           <v-btn flat
                 @click.stop="applyFilter">Применить</v-btn>  
-        </div>
-      
-      </v-toolbar>
-      <div v-if="currentFilter!==0">
-        <v-card>
-          <v-card-title class="pl-5 pt-3">
-            <div class="headline">{{filtersData[currentFilter - 1].name}}</div>
-          </v-card-title>
+        </div>      
+    </v-toolbar>
 
-          <!-- Список элементов фильтра -->
-          <v-card-text>
-            Здесь может быть строка поиска
-          </v-card-text>
-          <v-list>
-            <v-list-tile v-for="(item, index) in filtersData[currentFilter - 1].items" :key="index"
-                        style="height:30px">
-              <v-list-tile-action>
-                <v-checkbox v-model="item.selected" :label="item.name"></v-checkbox>
-              </v-list-tile-action>
-            </v-list-tile>
-          </v-list>
-
-          <v-divider class="ma-2">
-          </v-divider>
-          <!-- кнопка очистки -->
-          <v-card-actions>
-            <v-btn flat 
-                  color="blue"
-                  @click.stop="clearFilter()">Очистить</v-btn>
-          </v-card-actions>
-
-        </v-card>
-      </div>
+    <div v-if="filterButtonPressed">
+      <v-card>
+        <v-card-title class="pl-5 pt-3">
+          <div class="headline">{{filtersData[currentFilterIndex].name}}</div>
+        </v-card-title>
+        <!-- Список элементов фильтра -->
+        <v-card-text>
+          Здесь может быть строка поиска
+        </v-card-text>
+        <v-list>
+          <v-list-tile v-for="(item, index) in filtersData[currentFilterIndex].items" :key="index"
+                      style="height:30px">
+            <v-list-tile-action>
+              <v-checkbox v-model="item.selected" :label="item.name"></v-checkbox>
+            </v-list-tile-action>
+          </v-list-tile>
+        </v-list>
+        <v-divider class="ma-2">
+        </v-divider>
+        <!-- кнопка очистки -->
+        <v-card-actions>
+          <v-btn flat 
+                color="blue"
+                @click.stop="clearFilter">Очистить</v-btn>
+        </v-card-actions>
+      </v-card>
+    </div>
   </v-container>
 </template>
 
 <script>
 export default {
   name: 'Filters',
-  // props: {
-  //   filtersData: Object
-  // },
   data() {
     return {
+      // текущий активный фильтр
       currentFilter: 0,
+      filterButtonPressed: false,
       filtersData: [
         {
           name: 'Роль',
@@ -143,7 +139,7 @@ export default {
           items: [
             {
               code: 'BUH',
-              name: 'Бухналтерия',
+              name: 'Бухгалтерия',
               selected: false,
               count: 0
             },
@@ -165,30 +161,34 @@ export default {
           name: 'Тэг',
           items: []
         }
-      ],
-      currentFileterIndex: 0,
-      selected: []
+      ]
     }
   },
   methods:{
     applyFilter() {
-      let index = this.currentFilter - 1
-      console.log(this.filtersData[ index ].items)
-      this.currentFilter = 0
+      // Применить фильтр к текущим модулям/курсам
+      console.log(this.filtersData[ this.currentFilterIndex ].items)
+      // сбросить выбор фильтра
+      this.currentFilter = undefined
+      this.filterButtonPressed = false
     },
     setFilter(index) {
-      if(this.currentFilter !== 0)
-        this.currentFilter = 0
+      console.log('setFilter ' + index)
+      this.filterButtonPressed = !this.filterButtonPressed
+      this.currentFilter = index + 1
     },
     clearFilter() {
       // сбросить выбор
-      let currentFilter = this.currentFilter - 1
-      for (let index = 0; index < this.filtersData[currentFilter].length; index++) {
-        this.filtersData[currentFilter].items[index] = false
+      for (let index = 0; index < this.filtersData[this.currentFilterIndex].items.length; index++) {
+        this.filtersData[this.currentFilterIndex].items[index].selected = false
       }
-      console.log(currentFilter)
-      console.log(this.filtersData[ currentFilter ].items)
     }
+  },
+  computed: {
+    // индекс текущего активного фильтра
+    currentFilterIndex() {
+        return this.currentFilter !== undefined ? this.currentFilter - 1 : 0
+      }
   }
 }
 </script>

@@ -81,64 +81,101 @@
         </v-layout>
       </v-flex>
     </v-layout> -->
-    <Filters/>
+    <Filters />
   </v-container>
 </template>
 
 <script>
 import Filters from "./Filters.vue"
+
   export default {
     data: () => ({
-      ecosystem: [
+      filtersData: [
         {
-          text: 'vuetify-loader',
-          href: 'https://github.com/vuetifyjs/vuetify-loader'
+          name: 'Роль',
+          items: [
+            {
+              code: 'A',
+              name: 'Администратор',
+              selected: false,
+              count: 0
+            },
+            {
+              code: 'D',
+              name: 'Разработчик',
+              selected: false,
+              count: 0
+            },
+            {
+              code: 'BA',
+              name: 'Бизнес-аналитик',
+              selected: false,
+              count: 0
+            },
+            {
+              code: 'BUH',
+              name: 'Бухгалтер',
+              selected: false,
+              count: 0
+            },
+            {
+              code: 'P',
+              name: 'Партнеры по продажам',
+              selected: false,
+              count: 0
+            }
+          ]
         },
         {
-          text: 'github',
-          href: 'https://github.com/vuetifyjs/vuetify'
+          name: 'Уровень',
+          items: [
+            {
+              code: 'B',
+              name: 'Начальный',
+              selected: false,
+              count: 0
+            },
+            {
+              code: 'M',
+              name: 'Средний',
+              selected: false,
+              count: 0
+            },
+            {
+              code: 'P',
+              name: 'Профессиональный',
+              selected: false,
+              count: 0
+            }
+          ]
         },
         {
-          text: 'awesome-vuetify',
-          href: 'https://github.com/vuetifyjs/awesome-vuetify'
+          name: 'Продукты',
+          items: [
+            {
+              code: 'BUH',
+              name: 'Бухгалтерия',
+              selected: false,
+              count: 0
+            },
+            {
+              code: 'BUHP',
+              name: 'Зарплата и управление персоналом',
+              selected: false,
+              count: 0
+            },
+            {
+              code: 'IT',
+              name: 'IT-Enterprise',
+              selected: false,
+              count: 0
+            }
+          ]
+        },
+        {
+          name: 'Тэг',
+          items: []
         }
-      ],
-      importantLinks: [
-        {
-          text: 'Documentation',
-          href: 'https://vuetifyjs.com'
-        },
-        {
-          text: 'Chat',
-          href: 'https://community.vuetifyjs.com'
-        },
-        {
-          text: 'Made with Vuetify',
-          href: 'https://madewithvuetifyjs.com'
-        },
-        {
-          text: 'Twitter',
-          href: 'https://twitter.com/vuetifyjs'
-        },
-        {
-          text: 'Articles',
-          href: 'https://medium.com/vuetify'
-        }
-      ],
-      whatsNext: [
-        {
-          text: 'Explore components',
-          href: 'https://vuetifyjs.com/components/api-explorer'
-        },
-        {
-          text: 'Select a layout',
-          href: 'https://vuetifyjs.com/layout/pre-defined'
-        },
-        {
-          text: 'Frequently Asked Questions',
-          href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions'
-        }
-
       ]
     }),
     components: {
