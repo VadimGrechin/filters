@@ -81,7 +81,7 @@
         </v-layout>
       </v-flex>
     </v-layout> -->
-    <Filters />
+    <Filters :filters="filtersData" @filter-changed="getFilters"/>
   </v-container>
 </template>
 
@@ -180,7 +180,12 @@ import Filters from "./Filters.vue"
     }),
     components: {
         Filters
+      },
+    methods: {
+      getFilters(currentFilters){
+        console.log(currentFilters)
       }
+    }
   }
 </script>
 
