@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container pa-0 mt-3>
     <v-layout>
       <v-flex xs12>
         <!-- Панель фильтров -->
@@ -12,19 +12,19 @@
             <v-btn-toggle max
                 v-model="currentFilter"
                 class="transparent">
-            <!-- Если нет доступного фильтра - скрыть кнопку -->
-            <v-layout v-for="(filter, index) in filters" :key="index">
-              <v-btn 
-                    v-if="filter.items.length > 0"
-                    :value="index + 1" 
-                    @click="setFilter(index)"
-                    flat 
-                    class="mx-2">
-                  {{filter.name}}
-                <v-icon>{{index + 1 === currentFilter ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</v-icon>
-              </v-btn>
-            </v-layout>
-          </v-btn-toggle>
+            	<!-- Если нет доступного фильтра - скрыть кнопку -->
+            	<v-layout v-for="(filter, index) in filters" :key="index">
+              	<v-btn 
+                	    v-if="filter.items.length > 0"
+                	    :value="index + 1" 
+                	    @click="setFilter(index)"
+                	    flat 
+                	    class="mx-2">
+                	  {{filter.name}}
+                	<v-icon>{{index + 1 === currentFilter ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</v-icon>
+              	</v-btn>
+            	</v-layout>
+          	</v-btn-toggle>
           <v-divider
             class="mx-2"
             vertical>
